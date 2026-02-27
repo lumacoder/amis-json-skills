@@ -1,4 +1,4 @@
-# amis-ui
+# amis-json-skills
 
 百度amis低代码框架JSON Schema生成专家。精准理解业务意图，生成正确、交互友好的amis配置，支持复杂交互（点击、回调、重载、弹层），兼容移动端。
 
@@ -32,7 +32,7 @@
 在对话中直接加载：
 
 ```
-加载 amis-ui skill
+@amis-json-skills
 ```
 
 或描述需求自动触发：
@@ -45,17 +45,17 @@
 
 #### 方式二：手动引用模板
 
-模板位于：`~/.claude/skills/amis-ui/templates/`
+模板位于：`~/.claude/skills/amis-json-skills/templates/`
 
 ```bash
 # 查看可用模板
-ls ~/.claude/skills/amis-ui/templates/
+ls ~/.claude/skills/amis-json-skills/templates/
 ```
 
 复制模板到你的项目：
 
 ```bash
-cp ~/.claude/skills/amis-ui/templates/basic-crud.json ./my-crud.json
+cp ~/.claude/skills/amis-json-skills/templates/basic-crud.json ./my-crud.json
 ```
 
 ---
@@ -66,7 +66,7 @@ cp ~/.claude/skills/amis-ui/templates/basic-crud.json ./my-crud.json
 
 ```bash
 # 加载 skill
-/skill load amis-ui
+/skill load amis-json-skills
 
 # 或在对话中直接使用
 ```
@@ -75,10 +75,10 @@ cp ~/.claude/skills/amis-ui/templates/basic-crud.json ./my-crud.json
 
 ```bash
 # 列出模板
-ls ~/.claude/skills/amis-ui/templates/
+ls ~/.claude/skills/amis-json-skills/templates/
 
 # 读取模板
-cat ~/.claude/skills/amis-ui/templates/basic-crud.json
+cat ~/.claude/skills/amis-json-skills/templates/basic-crud.json
 ```
 
 #### 方式三：对话中触发
@@ -98,31 +98,31 @@ Antigravity 通过MCP（Model Context Protocol）集成，可以自动加载skil
 ```python
 # 在 Antigravity 配置中启用 skill
 {
-  "skills": ["amis-ui"]
+  "skills": ["amis-json-skills"]
 }
 ```
 
 或运行时加载：
 
 ```
-@amis-ui 帮我生成一个商品列表页面
+@amis-json-skills 帮我生成一个商品列表页面
 ```
 
 ---
 
 ## 模板清单
 
-| 模板文件 | 适用场景 | 核心组件 |
-|---------|---------|---------|
-| `login.json` | 用户登录页面 | Form |
-| `basic-crud.json` | 基础增删改查列表 | CRUD + Dialog |
-| `filter-crud.json` | 带条件搜索的CRUD | CRUD + filter |
-| `search-form.json` | 独立搜索筛选表单 | Form + target |
-| `detail-dialog.json` | 查看详情弹层 | Dialog + static |
-| `edit-dialog.json` | 编辑数据弹层 | Dialog + Form |
-| `select-crud.json` | 弹层中选择数据 | Dialog + CRUD |
-| `multi-step-wizard.json` | 多步骤流程向导 | Wizard |
-| `dashboard.json` | 数据看板 | Page + Chart + Card |
+| 模板文件                 | 适用场景         | 核心组件            |
+| ------------------------ | ---------------- | ------------------- |
+| `login.json`             | 用户登录页面     | Form                |
+| `basic-crud.json`        | 基础增删改查列表 | CRUD + Dialog       |
+| `filter-crud.json`       | 带条件搜索的CRUD | CRUD + filter       |
+| `search-form.json`       | 独立搜索筛选表单 | Form + target       |
+| `detail-dialog.json`     | 查看详情弹层     | Dialog + static     |
+| `edit-dialog.json`       | 编辑数据弹层     | Dialog + Form       |
+| `select-crud.json`       | 弹层中选择数据   | Dialog + CRUD       |
+| `multi-step-wizard.json` | 多步骤流程向导   | Wizard              |
+| `dashboard.json`         | 数据看板         | Page + Chart + Card |
 
 ---
 
@@ -130,16 +130,16 @@ Antigravity 通过MCP（Model Context Protocol）集成，可以自动加载skil
 
 ### 场景 → 组件
 
-| 业务场景 | amis组件 | 关键配置 |
-|---------|---------|---------|
-| 数据列表展示 | CRUD | api, columns, filter |
-| 表单提交 | Form | api, controls, rules |
-| 详情查看 | Dialog/Drawer | title, body, actions |
-| 搜索筛选 | Form (filter) | submitOnChange, target |
-| 批量操作 | Button + actionType | ajax, reload |
-| 页面跳转 | Button + actionType | url, link |
-| 状态提示 | Button + actionType | toast, confirm |
-| 多步骤流程 | Wizard | steps, source |
+| 业务场景     | amis组件            | 关键配置               |
+| ------------ | ------------------- | ---------------------- |
+| 数据列表展示 | CRUD                | api, columns, filter   |
+| 表单提交     | Form                | api, controls, rules   |
+| 详情查看     | Dialog/Drawer       | title, body, actions   |
+| 搜索筛选     | Form (filter)       | submitOnChange, target |
+| 批量操作     | Button + actionType | ajax, reload           |
+| 页面跳转     | Button + actionType | url, link              |
+| 状态提示     | Button + actionType | toast, confirm         |
+| 多步骤流程   | Wizard              | steps, source          |
 
 ### 组件选择决策树
 
@@ -172,11 +172,11 @@ Antigravity 通过MCP（Model Context Protocol）集成，可以自动加载skil
 
 ### 响应式配置
 
-| 桌面端 | 移动端 | 配置方式 |
-|-------|-------|---------|
-| 3列 | 1列 | `columnCount` + `responsive` |
+| 桌面端   | 移动端   | 配置方式                          |
+| -------- | -------- | --------------------------------- |
+| 3列      | 1列      | `columnCount` + `responsive`      |
 | 横向布局 | 垂直布局 | `mode: 'horizontal'` → responsive |
-| 完整表单 | 紧凑表单 | `size: 'md'` → `'sm'` |
+| 完整表单 | 紧凑表单 | `size: 'md'` → `'sm'`             |
 
 ### 移动端优先原则
 
@@ -191,14 +191,14 @@ Antigravity 通过MCP（Model Context Protocol）集成，可以自动加载skil
 
 ### 必填字段
 
-| 组件类型 | 必填字段 |
-|---------|---------|
-| Page | type, body |
-| Form | type, body/controls |
-| CRUD | type, api, columns |
-| Dialog | type, body |
-| Button | type, label/actionType |
-| Form Item | type, name |
+| 组件类型  | 必填字段               |
+| --------- | ---------------------- |
+| Page      | type, body             |
+| Form      | type, body/controls    |
+| CRUD      | type, api, columns     |
+| Dialog    | type, body             |
+| Button    | type, label/actionType |
+| Form Item | type, name             |
 
 ### API 配置
 
@@ -254,11 +254,11 @@ Antigravity 通过MCP（Model Context Protocol）集成，可以自动加载skil
 
 ### 校验级别
 
-| 级别 | 说明 | 示例 |
-|-----|-----|-----|
-| error | 语法错误/缺失必填字段 | 缺失type、JSON语法错误 |
-| warning | 建议优化项 | 建议添加loading配置 |
-| info | 最佳实践提示 | 建议添加description |
+| 级别    | 说明                  | 示例                   |
+| ------- | --------------------- | ---------------------- |
+| error   | 语法错误/缺失必填字段 | 缺失type、JSON语法错误 |
+| warning | 建议优化项            | 建议添加loading配置    |
+| info    | 最佳实践提示          | 建议添加description    |
 
 ### 校验规则
 
@@ -271,13 +271,15 @@ Antigravity 通过MCP（Model Context Protocol）集成，可以自动加载skil
 ### 使用校验
 
 ```javascript
-const { validateAmisSchema } = require('./rules/schema-validator.js');
+const { validateAmisSchema } = require("./rules/schema-validator.js");
 
-const schema = { /* 你的 amis 配置 */ };
+const schema = {
+  /* 你的 amis 配置 */
+};
 const result = validateAmisSchema(schema);
 
-console.log(result.errors);    // 错误列表
-console.log(result.warnings);  // 警告列表
+console.log(result.errors); // 错误列表
+console.log(result.warnings); // 警告列表
 console.log(result.suggestions); // 建议列表
 ```
 
@@ -306,11 +308,11 @@ console.log(result.suggestions); // 建议列表
 ## 目录结构
 
 ```
-amis-ui/
+amis-json-skills/
 ├── README.md                     # 本文件
 ├── examples/                     # 业务示例
 │   └── order-management.json    # 订单管理页面
-├── templates/                    # 预设模板 (位于 ~/.claude/skills/amis-ui/templates/)
+├── templates/                    # 预设模板 (位于 ~/.claude/skills/amis-json-skills/templates/)
 │   ├── login.json
 │   ├── basic-crud.json
 │   ├── filter-crud.json
@@ -320,10 +322,10 @@ amis-ui/
 │   ├── select-crud.json
 │   ├── multi-step-wizard.json
 │   └── dashboard.json
-├── rules/                        # 校验规则 (位于 ~/.claude/skills/amis-ui/rules/)
+├── rules/                        # 校验规则 (位于 ~/.claude/skills/amis-json-skills/rules/)
 │   ├── schema-validator.js
 │   └── common-patterns.js
-└── SKILL.md                      # Skill 说明 (位于 ~/.claude/skills/amis-ui/)
+└── SKILL.md                      # Skill 说明 (位于 ~/.claude/skills/amis-json-skills/)
 ```
 
 ---
